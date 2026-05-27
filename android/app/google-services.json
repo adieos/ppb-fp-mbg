@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "999217105955",
+    "project_id": "fp-ppb-3ac2a",
+    "storage_bucket": "fp-ppb-3ac2a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999217105955:android:a49f9d1a642cfe531c7596",
+        "android_client_info": {
+          "package_name": "com.example.monitorbg"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbZb2JGHmboztGAx47JYlA4X2Z7Xcnn9M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
