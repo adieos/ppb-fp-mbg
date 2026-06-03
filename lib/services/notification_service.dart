@@ -111,6 +111,9 @@ class NotificationService {
     }
   }
 
+  /// Cancel the daily reminder notification.
+  Future<void> cancelReminder() => _localNotif.cancel(_reminderNotifId);
+
   /// Cancel all local notifications (e.g. on logout).
   Future<void> cancelAll() => _localNotif.cancelAll();
 
