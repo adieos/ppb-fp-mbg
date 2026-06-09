@@ -99,5 +99,5 @@ class KownerFirestoreService {
   }
 
   // flow: login -> AuthGate() -> kowner_shell (di dalemnya ada screens[])
-  // di navbar: create report, list reports, pending reports (bsia jd calendars or smth), profile. 4 bagian kek di admin
+  // di navbar:  list reports, create report, pending reports (bsia jd calendars or smth), profile. 4 bagian kek di admin
 }
