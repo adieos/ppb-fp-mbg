@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:monitorbg/screens/kowner/kowner_create_report_screen.dart';
+import 'package:monitorbg/screens/kowner/kowner_dashboard_screen.dart';
+import 'package:monitorbg/screens/kowner/kowner_profile.dart';
 
 // import 'kowner_dashboard_screen.dart';
 // import 'kowner_reports_screen.dart';
@@ -17,10 +20,10 @@ class _KownerShellState extends State<KownerShell> {
 
   static const _screens = [
     // TO DO: ganti ini ya
-    Text("List reports"),
-    Text("Create report"),
+    KownerDashboardScreen(),
+    KownerCreateReportScreen(),
     Text("pending reports (calender idk)"),
-    Text("Profil"),
+    KownerProfileTab(),
   ];
 
   // pake indexedstack = load all widgets in memory, switch based on index

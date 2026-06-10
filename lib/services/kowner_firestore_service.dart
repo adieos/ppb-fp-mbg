@@ -43,13 +43,13 @@ class KownerFirestoreService {
     await reports.add({
       'kitchenId': 'GA KEPAKE (harusny sm kek ownerUid)',
       'kitchenName': theuser?.name ?? 'Unknown dapur le',
-      'status': ReportStatus.draft,
+      'status': ReportStatus.submitted,
       'rejectionReason': null,
       'verifiedBy': null,
-      'verifiedAt': null,
+      'verifiedAt': Timestamp.now(),
       'isHoliday': false,
       'createdAt': Timestamp.now(),
-      'updatedAt': null,
+      'updatedAt': Timestamp.now(),
       'ownerUid': currentUser!.uid,
       'date': Timestamp.fromDate(date),
       'menuItems': menu.map((m) => m.toMap()).toList(),
@@ -84,7 +84,7 @@ class KownerFirestoreService {
     List<String> proofImageUrls,
   ) {
     return reports.doc(docID).update({
-      'status': ReportStatus.draft, // prevent cheating
+      'status': ReportStatus.submitted, // prevent cheating
       'updatedAt': Timestamp.now(),
       'date': Timestamp.fromDate(date),
       'menuItems': menu.map((m) => m.toMap()).toList(),
