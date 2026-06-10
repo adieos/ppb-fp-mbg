@@ -8,9 +8,11 @@ import 'screens/login_screen.dart';
 import 'screens/admin/admin_shell.dart';
 import 'services/admin_firestore_service.dart';
 import 'services/notification_service.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('id_ID');
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotificationService().init();
   runApp(const MyApp());

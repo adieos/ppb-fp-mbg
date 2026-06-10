@@ -17,7 +17,10 @@ class _KDState extends State<KownerDashboardScreen> {
   @override
   Widget build(BuildContext build) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Daftar Laporan')),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF1C1F2E),
+        title: const Text('Daftar Laporan'),
+      ),
       body: StreamBuilder<List<ReportModel>>(
         stream: _svc.getReports(),
         builder: (context, snap) {
@@ -88,9 +91,15 @@ class _ReportCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: const Color(0xFF1C1F2E),
+          color: report.isHoliday
+              ? Colors.red.withValues(alpha: 0.15)
+              : Color(0xFF1C1F2E),
           borderRadius: BorderRadius.circular(14),
-          border: Border.all(color: const Color(0xFF2A2D3E)),
+          border: Border.all(
+            color: report.isHoliday
+                ? Colors.red.withValues(alpha: 0.4)
+                : Color(0xFF2A2D3E),
+          ),
         ),
         child: Row(
           children: [
@@ -115,6 +124,13 @@ class _ReportCard extends StatelessWidget {
                       fontSize: 13,
                     ),
                   ),
+                  if (report.isHoliday) ...[
+                    const SizedBox(height: 4),
+                    const Text(
+                      'Hari Libur!',
+                      style: TextStyle(color: Colors.redAccent, fontSize: 12),
+                    ),
+                  ],
                 ],
               ),
             ),

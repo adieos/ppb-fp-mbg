@@ -10,6 +10,7 @@ class HolidayService {
 
   static const String _countryCode = 'ID';
   static const String _baseUrl = 'date.nager.at';
+  final Map<int, List<DateTime>> _cache = {};
 
   /// Returns `true` when the provided date is a public holiday in Indonesia.
   Future<bool> checkIsHoliday(DateTime date) async {
@@ -54,6 +55,30 @@ class HolidayService {
       return false;
     } catch (_) {
       return false;
+    }
+  }
+
+  Future<List<DateTime>> getHolidaysForYear(int year) async {
+    // return cached result if available
+    if (_cache.containsKey(year)) return _cache[year]!;
+
+    try {
+      final uri = Uri.https(
+        _baseUrl,
+        '/api/v3/PublicHolidays/$year/$_countryCode',
+      );
+      final response = await http.get(uri);
+      if (response.statusCode != 200) return [];
+
+      final List data = jsonDecode(response.body);
+      final holidays = data
+          .map((h) => DateTime.parse(h['date'] as String))
+          .toList();
+
+      _cache[year] = holidays; // cache it
+      return holidays;
+    } catch (_) {
+      return [];
     }
   }
 }

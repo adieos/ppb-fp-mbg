@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:monitorbg/screens/kowner/kowner_calendar.dart';
 import 'package:monitorbg/screens/kowner/kowner_create_report_screen.dart';
 import 'package:monitorbg/screens/kowner/kowner_dashboard_screen.dart';
 import 'package:monitorbg/screens/kowner/kowner_profile.dart';
+import 'package:monitorbg/screens/kowner/kowner_rilcalendar.dart';
 
 // import 'kowner_dashboard_screen.dart';
 // import 'kowner_reports_screen.dart';
@@ -22,7 +24,8 @@ class _KownerShellState extends State<KownerShell> {
     // TO DO: ganti ini ya
     KownerDashboardScreen(),
     KownerCreateReportScreen(),
-    Text("pending reports (calender idk)"),
+    KownerCalendarScreen(),
+    // KownerThirdScreen(), // buat testing
     KownerProfileTab(),
   ];
 
