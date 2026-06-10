@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 class KownerProfileTab extends StatelessWidget {
   const KownerProfileTab({super.key});
@@ -48,6 +49,16 @@ class KownerProfileTab extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
+            ),
+            ElevatedButton(
+              onPressed: () => FirebaseCrashlytics.instance.crash(),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text('Test Crash'),
             ),
           ],
         ),

@@ -3,9 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../models/report_model.dart';
 import '../models/user_model.dart';
 import './admin_firestore_service.dart';
+import './holiday.dart';
 
 class KownerFirestoreService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final _hday = HolidayService();
   final CollectionReference reports = FirebaseFirestore.instance.collection(
     'reports',
   );
@@ -40,6 +42,7 @@ class KownerFirestoreService {
   ) async {
     final AdminFirestoreService usergetter = AdminFirestoreService();
     final theuser = await usergetter.getUser(currentUser!.uid);
+    final hdaykh = await _hday.checkIsHoliday(date);
     await reports.add({
       'kitchenId': 'GA KEPAKE (harusny sm kek ownerUid)',
       'kitchenName': theuser?.name ?? 'Unknown dapur le',
@@ -47,7 +50,7 @@ class KownerFirestoreService {
       'rejectionReason': null,
       'verifiedBy': null,
       'verifiedAt': Timestamp.now(),
-      'isHoliday': false,
+      'isHoliday': hdaykh,
       'createdAt': Timestamp.now(),
       'updatedAt': Timestamp.now(),
       'ownerUid': currentUser!.uid,

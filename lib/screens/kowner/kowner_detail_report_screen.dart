@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../../models/report_model.dart';
 import '../../services/admin_firestore_service.dart';
 import '../../services/minio_service.dart';
+import './kowner_edit_report_screen.dart';
 
 class KownerDetailReportScreen extends StatefulWidget {
   final ReportModel report;
@@ -14,6 +15,7 @@ class KownerDetailReportScreen extends StatefulWidget {
 }
 
 class _KDRState extends State<KownerDetailReportScreen> {
+  final _minio = MinioService();
   @override
   Widget build(BuildContext context) {
     final report = widget.report;
@@ -39,6 +41,23 @@ class _KDRState extends State<KownerDetailReportScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            IconButton(
+              icon: const Icon(
+                Icons.edit_document,
+                color: Colors.white,
+                size: 20,
+              ),
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => KownerEditReportScreen(report: report),
+                  ),
+                );
+                // pop lg biar ke awal
+                if (mounted) Navigator.pop(context);
+              },
+            ),
             Text(
               report.kitchenName,
               style: const TextStyle(
@@ -83,6 +102,48 @@ class _KDRState extends State<KownerDetailReportScreen> {
               (item) => Text(
                 '- ${item.name}: ${item.portionCount} porsi',
                 style: const TextStyle(color: Color(0xFF8A8FA8)),
+              ),
+            ),
+            // In your detail screen, where you want to show images:
+            SizedBox(
+              height: 110,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: report.proofImageUrls.length,
+                itemBuilder: (context, i) => FutureBuilder<String>(
+                  future: _minio.getPresignedUrl(report.proofImageUrls[i]),
+                  builder: (context, snap) {
+                    if (!snap.hasData) {
+                      return Container(
+                        width: 110,
+                        height: 110,
+                        margin: const EdgeInsets.only(right: 8),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF2A2D3E),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Center(
+                          child: CircularProgressIndicator(
+                            color: Color(0xFF6C63FF),
+                            strokeWidth: 2,
+                          ),
+                        ),
+                      );
+                    }
+                    return Container(
+                      margin: const EdgeInsets.only(right: 8),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          snap.data!,
+                          width: 110,
+                          height: 110,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
 
