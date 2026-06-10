@@ -19,16 +19,16 @@ class MenuItemModel {
   });
 
   factory MenuItemModel.fromMap(Map<String, dynamic> map) => MenuItemModel(
-        name: map['name'] as String,
-        portionCount: map['portionCount'] as int,
-        caloriesPerPortion: map['caloriesPerPortion'] as int?,
-      );
+    name: map['name'] as String,
+    portionCount: map['portionCount'] as int,
+    caloriesPerPortion: map['caloriesPerPortion'] as int?,
+  );
 
   Map<String, dynamic> toMap() => {
-        'name': name,
-        'portionCount': portionCount,
-        'caloriesPerPortion': caloriesPerPortion,
-      };
+    'name': name,
+    'portionCount': portionCount,
+    'caloriesPerPortion': caloriesPerPortion,
+  };
 }
 
 class ReportModel {
@@ -51,8 +51,8 @@ class ReportModel {
 
   const ReportModel({
     required this.id,
-    required this.kitchenId,
-    required this.kitchenName,
+    required this.kitchenId, // delete? sama kek id
+    required this.kitchenName, // delete? sama kek ownerUid
     required this.ownerUid,
     required this.date,
     required this.menuItems,
@@ -99,23 +99,22 @@ class ReportModel {
     String? rejectionReason,
     String? verifiedBy,
     DateTime? verifiedAt,
-  }) =>
-      ReportModel(
-        id: id,
-        kitchenId: kitchenId,
-        kitchenName: kitchenName,
-        ownerUid: ownerUid,
-        date: date,
-        menuItems: menuItems,
-        totalBeneficiaries: totalBeneficiaries,
-        distributionTime: distributionTime,
-        proofImageUrls: proofImageUrls,
-        status: status ?? this.status,
-        rejectionReason: rejectionReason ?? this.rejectionReason,
-        verifiedBy: verifiedBy ?? this.verifiedBy,
-        verifiedAt: verifiedAt ?? this.verifiedAt,
-        isHoliday: isHoliday,
-        createdAt: createdAt,
-        updatedAt: DateTime.now(),
-      );
+  }) => ReportModel(
+    id: id,
+    kitchenId: kitchenId,
+    kitchenName: kitchenName,
+    ownerUid: ownerUid,
+    date: date,
+    menuItems: menuItems,
+    totalBeneficiaries: totalBeneficiaries,
+    distributionTime: distributionTime,
+    proofImageUrls: proofImageUrls,
+    status: status ?? this.status,
+    rejectionReason: rejectionReason ?? this.rejectionReason,
+    verifiedBy: verifiedBy ?? this.verifiedBy,
+    verifiedAt: verifiedAt ?? this.verifiedAt,
+    isHoliday: isHoliday,
+    createdAt: createdAt,
+    updatedAt: DateTime.now(),
+  );
 }
